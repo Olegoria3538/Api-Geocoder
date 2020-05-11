@@ -6,8 +6,7 @@ const $data = createStore<RootObject>({})
 const getData = createEvent<string>()
 $data.on(getData, (_, req) => {
   getDataFx(req)
-  const obg = new Object()
-  return obg
+  return {}
 })
 
 const getDataFx = createEffect<string, RootObject, any>({
@@ -26,7 +25,8 @@ const $arrayAnswer = $data.map(
 
 const $geocoderResponseMetaData = $data.map(
   (x) =>
-    x.response?.GeoObjectCollection.metaDataProperty.GeocoderResponseMetaData
+    x.response?.GeoObjectCollection.metaDataProperty.GeocoderResponseMetaData ||
+    null
 )
 
 const $result = combine({
